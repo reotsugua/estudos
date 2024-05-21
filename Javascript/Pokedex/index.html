@@ -13,20 +13,20 @@
         <section class="">
             <h1>Pokedex</h1>
 
-            <ol class="mx-auto list-group list-group-horizontal-sm row gap-5" style="list-style: none;">
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">Bulbalsaur</li>
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">Ivysaur</li>
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">Venusaur</li>
-            
-            
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">charmander</li>
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">charmeleon</li>
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">charizard</li>
-            
-            
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">squirtle</li>
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">wartortle</li>
-                <li class="text-white list-group-item col-12 col-sm-5 col-md-3 rounded bg-success">blastoise</li>
+            <ol id="pokemon-list" class="mx-auto list-group list-group-horizontal-sm row gap-5" style="list-style: none;">
+                <li class="bg-success col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-white">
+                    <div class=" d-flex justify-content-between">
+                        <span>Bulbasaur</span>
+                        <span>#001</span>
+                    </div>
+                    <div class="d-flex justify-content-between my-auto">
+                        <ol class="p-0 d-flex gap-1 flex-column my-auto" style="list-style: none;">
+                            <li class="badge rounded-pill text-bg-primary ">grass</li>
+                            <li class="badge rounded-pill text-bg-primary ">poison</li>
+                        </ol>
+                        <img class="align-self-end" style="max-width: 45%;" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="" srcset="">
+                    </div>
+                </li>
             </ol>
         </section>
     </main>
