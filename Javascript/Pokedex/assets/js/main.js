@@ -1,5 +1,5 @@
 async function api() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=550');
     return await response.json();
 }
 
@@ -26,8 +26,7 @@ async function insertData(idElement) {
     const teste = document.querySelector(idElement)
     const data = await getPokemon()
     const card = data.map((x)=> {
-        const novo = x.data.sprites.other.showdown.front_default;
-        console.log(novo)
+        const novo = x.data.types.map((x) => `<li class="badge rounded-pill text-bg-${tipos[x.type.name]}">${x.type.name}</li>`)
         return `
         <li class="bg-secondary col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-white">
                 <div class=" d-flex justify-content-between">
@@ -36,7 +35,7 @@ async function insertData(idElement) {
                 </div>
                 <div class="d-flex justify-content-between my-auto">
                     <ol class="p-0 d-flex gap-1 flex-column my-auto" style="list-style: none;">
-                        <li class="badge rounded-pill text-bg-${tipos[x.data.types[0].type.name]}">${x.data.types[0].type.name}</li>
+                        ${novo.join('')}
                     </ol>
                     <img class="align-self-end" style="max-width: 45%;" src="${x.data.sprites.other.showdown.front_default}" alt="" srcset="">
                 </div>
