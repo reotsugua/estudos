@@ -1,5 +1,5 @@
 async function api() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=550');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10');
     return await response.json();
 }
 
@@ -9,11 +9,15 @@ async function getPokemon() {
     const promises = pokemons.results.map(async function (x) {
         const response = await fetch(x.url);
         const data = await response.json();
-        return {'name': x.name, 'data': data};
+        return data;
     } )
     return await Promise.all(promises);
 }
 
+
+function pokemonTypes(params, obj) {
+    return params.types.map((y) => `<li class="badge rounded-pill text-bg-${obj[y.type.name]}">${y.type.name}</li>`)
+}
 
 async function insertData(idElement) {
     const tipos = {
@@ -25,22 +29,18 @@ async function insertData(idElement) {
     }
     const teste = document.querySelector(idElement)
     const data = await getPokemon()
-    const card = data.map((x)=> {
-        const novo = x.data.types.map((x) => `<li class="badge rounded-pill text-bg-${tipos[x.type.name]}">${x.type.name}</li>`)
-        return `
-        <li class="bg-secondary col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-white">
-                <div class=" d-flex justify-content-between">
-                    <span>${x.name}</span>
-                    <span>#${x.data.id}</span>
-                </div>
-                <div class="d-flex justify-content-between my-auto">
-                    <ol class="p-0 d-flex gap-1 flex-column my-auto" style="list-style: none;">
-                        ${novo.join('')}
-                    </ol>
-                    <img class="align-self-end" style="max-width: 45%;" src="${x.data.sprites.other.showdown.front_default}" alt="" srcset="">
-                </div>
-        </li>
-    ` });
+    const card = data.map((x)=> `<li class="bg-secondary col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-white">
+        <div class=" d-flex justify-content-between">
+            <span>${x.name}</span>
+            <span>#${x.id}</span>
+        </div>
+        <div class="d-flex justify-content-between my-auto">
+            <ol class="p-0 d-flex gap-1 flex-column my-auto" style="list-style: none;">
+                ${pokemonTypes(x, tipos).join('')}
+            </ol>
+            <img class="align-self-end" style="max-width: 45%;" src="${x.sprites.other.showdown.front_default}" alt="" srcset="">
+        </div>
+    </li>`);
     teste.innerHTML = card.join('');
 
     
