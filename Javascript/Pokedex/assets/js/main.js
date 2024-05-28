@@ -1,7 +1,7 @@
 import { Pokemon } from "./pokemonModel.js";
 
 async function api() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=300');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=9');
     return await response.json();
 }
 
@@ -59,10 +59,10 @@ async function insertData(idElement) {
 
     const teste = document.querySelector(idElement)
     const pokemon = await getPokemon()
-    const card = pokemon.map((x)=> `<li class="bg-secondary col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-white">
+    const card = pokemon.map((x)=> `<li class="border-0 shadow-sm bg-light col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-dark">
         <div class=" d-flex justify-content-between">
-            <span>${x.nome}</span>
-            <span>#${x.numero}</span>
+            <span class="text-capitalize">${x.nome}</span>
+            <span class="fw-bold">#${x.numero}</span>
         </div>
         <div class="d-flex justify-content-between my-auto">
             <ol class="p-0 d-flex gap-1 flex-column my-auto" style="list-style: none;">
