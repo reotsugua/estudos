@@ -1,5 +1,7 @@
+import { Pokemon } from "./pokemonModel.js";
+
 async function api() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=300');
     return await response.json();
 }
 
@@ -9,36 +11,64 @@ async function getPokemon() {
     const promises = pokemons.results.map(async function (x) {
         const response = await fetch(x.url);
         const data = await response.json();
-        return data;
+        return convertJsonParaModel(data);
     } )
     return await Promise.all(promises);
 }
 
+function convertJsonParaModel (results) {
+    const pokemon = new Pokemon;
+    pokemon.nome = results.name;
+    pokemon.numero = results.id;
 
-function pokemonTypes(params, obj) {
-    return params.types.map((y) => `<li class="badge rounded-pill text-bg-${obj[y.type.name]}">${y.type.name}</li>`)
+    const tipos = results.types.map((x)=> x.type.name);
+    pokemon.tipos = tipos;
+    const [tipo] = tipos
+    pokemon.tipo = tipo
+
+    pokemon.foto = results.sprites.other.showdown.front_default;
+
+    return pokemon;
+}
+
+
+function pokemonTypes(pokemon, obj) {
+    return pokemon.tipos.map((x)=>`<li class="badge rounded-pill text-bg-${obj[x]}">${x}</li>`)
 }
 
 async function insertData(idElement) {
     const tipos = {
         grass : 'success',
-        fire : 'danger',
+        fire : 'orange',
         water : 'primary',
-        bug : 'dark',
-        normal : 'light'
+        bug : 'indigo',
+        electric : 'warning',
+        normal : 'light',
+        poison : 'danger',
+        flying: 'info',
+        ground: 'marrom',
+        fairy: 'pink',
+        fighting: 'verdeEscuro',
+        ice: 'cyan',
+        psychic: 'verdeAgua',
+        rock: 'dark',
+        ghost: 'cinza',
+        dragon: 'dragon',
+        dark: 'escuro'
     }
+
     const teste = document.querySelector(idElement)
-    const data = await getPokemon()
-    const card = data.map((x)=> `<li class="bg-secondary col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-white">
+    const pokemon = await getPokemon()
+    const card = pokemon.map((x)=> `<li class="bg-secondary col-12 col-md-3 col-sm-5 d-flex flex-column list-group-item rounded text-white">
         <div class=" d-flex justify-content-between">
-            <span>${x.name}</span>
-            <span>#${x.id}</span>
+            <span>${x.nome}</span>
+            <span>#${x.numero}</span>
         </div>
         <div class="d-flex justify-content-between my-auto">
             <ol class="p-0 d-flex gap-1 flex-column my-auto" style="list-style: none;">
                 ${pokemonTypes(x, tipos).join('')}
             </ol>
-            <img class="align-self-end" style="max-width: 45%;" src="${x.sprites.other.showdown.front_default}" alt="" srcset="">
+            <img class="align-self-end" style="max-width: 45%;" src="${x.foto}" alt="" srcset="">
         </div>
     </li>`);
     teste.innerHTML = card.join('');
