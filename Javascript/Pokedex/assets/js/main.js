@@ -1,7 +1,7 @@
 import { Pokemon } from "./pokemonModel.js";
 
 async function api() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=9');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=150');
     return await response.json();
 }
 
