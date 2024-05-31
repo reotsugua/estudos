@@ -1,11 +1,13 @@
-const pessoa = {
-    idade: 18
+function Pessoa(nome, idade) {
+    this.nome = nome,
+    this.idade = idade
 }
 
-const renan = {
-    nome: 'renan',
-    __proto__: pessoa,
-    idade: 32
+Pessoa.falar = function () {
+    console.log(`Meu nome é: ${this.nome}`)
 }
 
-console.log(renan)
+const renan = new Pessoa;
+renan.falar()
+
+
