@@ -35,15 +35,21 @@ let aprovados = []
 
 function teste(arr, mediaFinal) {
     for (let index = 0; index < arr.length; index++) {
-        // console.log(alunos[index])
-        // console.log(alunos[index])
-        if (arr[index].nota >= mediaFinal) {
-            aprovados.push(arr[index].nome, arr[index].turma)
+        const {nome, nota} = arr[index]
+        if (nota >= mediaFinal) {
+            aprovados.push(nome)
         }        
     }
-
     return aprovados;
 }
 
-const novo = teste(alunos, 10)
+
+function teste1(arr, mediaFinal) {
+    return arr.filter(({nota}) => nota >= mediaFinal) // Destructuring direto no filter
+              .map(({nome}) => nome); // Mapeia os resultados filtrados para obter apenas os nomes
+}
+
+const novo = teste(alunos, 7)
+const novo1 = teste1(alunos, 7)
 console.log(novo)
+console.log(novo1)
