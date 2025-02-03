@@ -16,6 +16,14 @@ const htmlComponent = (resumeWeather:Weather): string => {
         `
 }
 
-export default function renderCardHumidityComponent(resumeWeather:Weather) {
+function renderCardHumidityComponent(resumeWeather:Weather) {
     cardHumidityComponent.innerHTML = htmlComponent(resumeWeather);
 }
+
+const HumidityCardComponent = {
+    update(resumeWeather:Weather):void {
+        renderCardHumidityComponent(resumeWeather);
+    }
+}
+
+export default HumidityCardComponent

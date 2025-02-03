@@ -1,8 +1,8 @@
 import { getDataWeather } from "../service/wheather.service.js";
 import Weather from "../types/Weather.js";
 import { buttonLoading } from "../utils/util.js";
-import renderCardHumidityComponent from "./humidity.component.js";
-import renderCardResumeWeatherComponent from "./resumeWeather.component.js";
+import HumidityCardComponent from "./humidity.component.js";
+import WeatherSummaryComponent from "./resumeWeather.component.js";
 
 /* CAPTURA DE ELEMENTOS do DOM — Onde são capturados e armazenados elementos do DOM para manipulação. */
 const formSearchLocation: HTMLFormElement = document.getElementById(
@@ -26,8 +26,8 @@ formSearchLocation?.addEventListener("submit", async (e: SubmitEvent) => {
     const dataWeather: Weather = await getDataWeather(cityName);
     console.log(dataWeather);
 
-    renderCardResumeWeatherComponent(dataWeather);
-    renderCardHumidityComponent(dataWeather);
+    WeatherSummaryComponent.update(dataWeather);
+    HumidityCardComponent.update(dataWeather);
 
     form.reset();
   } catch (error: any) {

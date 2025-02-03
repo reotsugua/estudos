@@ -27,6 +27,13 @@ const htmlComponent = (resumeWeather:Weather): string => {
         `
 }
 
-export default function renderCardResumeWeatherComponent(resumeWeather:Weather) {
+function renderCardResumeWeatherComponent(resumeWeather:Weather): void {
     cardResumeWeatherComponent.innerHTML = htmlComponent(resumeWeather);
 }
+
+const WeatherSummaryComponent = {
+    update(resumeWeather:Weather) :void {
+        renderCardResumeWeatherComponent(resumeWeather);
+    }
+}
+export default WeatherSummaryComponent;
