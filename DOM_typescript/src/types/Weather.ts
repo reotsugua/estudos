@@ -12,6 +12,10 @@ type Weather = {
         temp_max: number;
         humidity: number;
     };
+    wind: {
+        speed: number;
+        deg: number;
+    };
 }
 
 export default Weather;

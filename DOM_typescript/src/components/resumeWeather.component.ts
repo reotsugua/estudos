@@ -3,8 +3,6 @@ import { capitalize, roundToTwoDecimals } from "../pipes/pipes.js";
 
 const cardResumeWeatherComponent: HTMLElement = document.getElementById('card-resume-weather-component') as HTMLElement;
 
-
-
 const htmlComponent = (resumeWeather:Weather): string => {
     const icon: string = `https://openweathermap.org/img/wn/${resumeWeather.weather.icon}.png`;
     const weatherDescriptionCapitalize: string = capitalize(resumeWeather.weather.description); 
