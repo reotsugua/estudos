@@ -1,9 +1,10 @@
 {
   "name": "dom_typescript",
   "version": "1.0.0",
-  "main": "dist/main.js",
+  "main": "dist/javascript/main.js",
+  "type": "module",
   "scripts": {
-    "start": "npx tsc --watch"
+    "start": "tsc -watch"
   },
   "keywords": [],
   "author": "",
