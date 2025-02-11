@@ -1,7 +1,7 @@
 import { getDataWeather } from "../service/wheather.service.js";
 import Weather from "../types/Weather.js";
-import renderCardHumidityComponent from "./humidity.component.js";
-import renderCardResumeWeatherComponent from "./resumeWeather.component.js";
+import HumidityCardComponent from "./humidity.component.js";
+import WeatherSummaryComponent from "./resumeWeather.component.js";
 
 async function success(position: GeolocationPosition): Promise<void> {
     const latitude = position.coords.latitude.toString();
@@ -11,8 +11,8 @@ async function success(position: GeolocationPosition): Promise<void> {
         const dataWeather: Weather = await getDataWeather(latitude, longitude);
         console.warn(dataWeather);
         
-        renderCardResumeWeatherComponent(dataWeather);
-        renderCardHumidityComponent(dataWeather);
+        WeatherSummaryComponent.update(dataWeather);
+        HumidityCardComponent.update(dataWeather);
         
     } catch (error) {
         
