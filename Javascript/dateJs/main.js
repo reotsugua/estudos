@@ -40,6 +40,7 @@ document.getElementById("form").onsubmit = (event) => {
     }));
     console.log("toISOString", dataConvertida.toISOString());
     console.log("toUTCString", dataConvertida.toUTCString());
+    console.log("teste", dataConvertida.toUTCString());
     
     
 }
